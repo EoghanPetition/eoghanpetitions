@@ -40,15 +40,16 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                sh """
-                sudo cp target/${WAR_NAME} ${TOMCAT_PATH}/ROOT.war
-                sudo /opt/tomcat11/bin/shutdown.sh || true
-                sleep 5
-                sudo rm -rf ${TOMCAT_PATH}/ROOT
-                sudo /opt/tomcat11/bin/startup.sh
-                """
-            }
-        }
+    steps {
+        sh """
+        sudo /opt/tomcat11/bin/shutdown.sh || true
+        sleep 5
+        sudo rm -rf ${TOMCAT_PATH}/ROOT
+        sudo rm -f ${TOMCAT_PATH}/ROOT.war
+        sudo cp target/${WAR_NAME} ${TOMCAT_PATH}/ROOT.war
+        sudo /opt/tomcat11/bin/startup.sh
+        """
+    }
+}
     }
 }
