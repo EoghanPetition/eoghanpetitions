@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    <p th:text="'Results for: ' + ${keyword}"></p>
+
+    <ul>
+        <li th:if="${#lists.isEmpty(petitions)}">No petitions found.</li>
+        <li th:each="petition : ${petitions}">
+            <a th:href="@{/petitions/{id}(id=${petition.id})}" th:text="${petition.title}"></a>
+        </li>
+    </ul>
+
+    <p>
+        <a href="/petitions/search">Search Again</a> |
+        <a href="/petitions">All Petitions</a>
+    </p>
+</body>
+</html>
