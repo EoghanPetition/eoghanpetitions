@@ -10,7 +10,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/EoghanPetition/eoghanpetitions'
+                checkout scm
             }
         }
 
